@@ -14,6 +14,9 @@ const login = async (req, res) => {
   if (!email || !password) {
     throw new BadRequestError("Please provide email and password");
   }
+  if (email.split("@")[1] != "gatech.edu") {
+    throw new BadRequestError("Please provide valid Georgia Tech Email");
+  }
   const user = await User.findOne({ email });
   if (!user) {
     throw new UnauthenticatedError("Invalid Credentials");

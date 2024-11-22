@@ -1,4 +1,4 @@
-const Task = require("../models/Task");
+const Task = require("../models/Item");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, NotFoundError } = require("../errors");
 
