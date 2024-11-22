@@ -15,6 +15,15 @@ const getAllItemByCategory = async (req, res) => {
   res.status(StatusCodes.OK).json({ items, count: items.length });
 };
 
+const getAllItemByKeyword = async (req, res) => {
+  const {
+    body: { keyword },
+  } = req;
+  const regex = new RegExp(keyword, "i");
+  const items = await Item.find({ description: { $regex: regex } });
+  res.status(StatusCodes.OK).json({ items, count: items.length });
+};
+
 const getAllItemByUser = async (req, res) => {
   const {
     user: { userId },
@@ -80,4 +89,5 @@ module.exports = {
   createItem,
   updateItem,
   deleteItem,
+  getAllItemByKeyword,
 };

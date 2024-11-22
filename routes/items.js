@@ -9,6 +9,7 @@ const {
   createItem,
   updateItem,
   deleteItem,
+  getAllItemByKeyword,
 } = require("../controllers/items");
 
 router
@@ -16,7 +17,8 @@ router
   .post(createItem)
   .get(getAllItem)
   .get(getAllItemByCategory)
-  .get(getAllItemByUser);
+  .get(getAllItemByUser)
+  .get(getAllItemByKeyword);
 
 router.route("/:id").get(getItem).delete(deleteItem).patch(updateItem);
 
