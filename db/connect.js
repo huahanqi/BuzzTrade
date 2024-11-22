@@ -6,7 +6,7 @@ const connectDB = (url) => {
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
-    dbName: "taskManager",
+    dbName: "BuzzTrade",
   });
 };
 

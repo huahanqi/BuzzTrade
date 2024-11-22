@@ -19,7 +19,8 @@ const connectDB = require("./db/connect");
 const authenticateUser = require("./middleware/authentication");
 // routers
 const authRouter = require("./routes/auth");
-const tasksRouter = require("./routes/tasks");
+const itemsRouter = require("./routes/items");
+const messagesRouter = require("./routes/messages");
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -37,13 +38,14 @@ app.use(cors());
 app.use(xss());
 
 app.get("/", (req, res) => {
-  res.send('<h1>Tasks API</h1><a href="/api-docs">Documentation</a>');
+  res.send('<h1>BuzzTrade API</h1><a href="/api-docs">Documentation</a>');
 });
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/tasks", authenticateUser, tasksRouter);
+app.use("/api/v1/items", authenticateUser, itemsRouter);
+app.use("/api/v1/messages", authenticateUser, messagesRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
