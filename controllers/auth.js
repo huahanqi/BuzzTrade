@@ -3,6 +3,16 @@ const { StatusCodes } = require("http-status-codes");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const register = async (req, res) => {
+  const { email } = req.body;
+  if (email.split("@")[1] != "gatech.edu") {
+    throw new BadRequestError("Please provide valid Georgia Tech Email");
+  }
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    throw new BadRequestError(
+      "An account with this information already exists. Please log in to continue."
+    );
+  }
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
   res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token });

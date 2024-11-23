@@ -9,7 +9,7 @@ const getAllItem = async (req, res) => {
 
 const getAllItemByCategory = async (req, res) => {
   const {
-    body: { category },
+    params: { category },
   } = req;
   const items = await Item.find({ category: category });
   res.status(StatusCodes.OK).json({ items, count: items.length });
@@ -17,9 +17,11 @@ const getAllItemByCategory = async (req, res) => {
 
 const getAllItemByKeyword = async (req, res) => {
   const {
-    body: { keyword },
+    params: { keyword },
   } = req;
-  const regex = new RegExp(keyword, "i");
+  const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Create a regex pattern with word boundaries
+  const regex = new RegExp(`\\b${escapedKeyword}\\b`, "i");
   const items = await Item.find({ description: { $regex: regex } });
   res.status(StatusCodes.OK).json({ items, count: items.length });
 };
@@ -47,7 +49,14 @@ const getItem = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const item = await Item.create(req.body);
+  const {
+    user: { userId },
+  } = req;
+  const item = await Item.create({
+    ...req.body,
+    sellerId: userId,
+    status: "available",
+  });
   res.status(StatusCodes.CREATED).json({ item });
 };
 
