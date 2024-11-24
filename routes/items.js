@@ -17,6 +17,6 @@ router.route("/getByCategory/:category").get(getAllItemByCategory);
 router.route("/getByUser").get(getAllItemByUser);
 router.route("/getByKeyword/:keyword").get(getAllItemByKeyword);
 // test resume from here
-router.route("/:id").get(getItem).delete(deleteItem).patch(updateItem);
+router.route("/:itemId").get(getItem).delete(deleteItem).patch(updateItem);
 
 module.exports = router;
