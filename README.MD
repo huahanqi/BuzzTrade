@@ -1,12 +1,11 @@
 ### Project Introduction
-This is the backend server code for CS 8803 MAS programming project (To-Do-List app) see details here: https://github.com/aaronwork1205/CS_8803_MAS_fall2023/tree/main. <br> 
-We use node.js and express.js to build this backend api, and store all the user-generated data in MongoDB Atlas Database. This backend server responds to requests when users register new accounts and log-in with existing accounts. 
-It also responds to requests sent by users when they want to create, read, update, and delete tasks in their Todo List. 
+
+This is the backend server code for CS 6400 Final Project named BuzzTrade. BuzzTrade serves as the online marketplace specifically for Georgia Tech students and faculties. It allows users to post second-hand items for sale and place orders on items they wanted. Moreover, it also provides the messaging features to let buyers ask sellers any questions they may have. <br>
+We use node.js and express.js to build this backend api, and store all the user-generated data in MongoDB Atlas Database.
 
 ### Project Setup
-This backend has been published to Heroku. The link is the following: https://tasks-api-8803-8645d4ff37f7.herokuapp.com/ <br>
-Go to https://tasks-api-8803-8645d4ff37f7.herokuapp.com/api-docs/ to see documents about all the api endpoints <br>
-You can also download the source code and run this command to test running our backend server on your local server (default port 8080)
+
+You can download the source code and run this command to test running our backend server on your local server (default port 8080)
 
 ```bash
 npm install && npm start
@@ -27,7 +26,4 @@ Swagger UI
 
 ### Reference
 
-We learned a lot about how to built backend apis from this tutorial: https://www.youtube.com/watch?v=qwfE7fSVaZM&t=34523s <br>
-and used some source code there as our starting point. Great thanks to John Smilga who created this tutorial for us! 
-
-
+We learned a lot about how to built backend apis from this tutorial: https://www.youtube.com/watch?v=qwfE7fSVaZM&t=34523s and used some source code there as our starting point. Great thanks to John Smilga who created this tutorial for us!
