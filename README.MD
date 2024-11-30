@@ -11,6 +11,15 @@ You can download the source code and run this command to test running our backen
 npm install && npm start
 ```
 
+### Usage
+Use the following command to see all available commands:
+```
+node cli.js --help
+
+```
+
+
+
 ### Reference
 
 We learned a lot about how to built backend apis from this tutorial: https://www.youtube.com/watch?v=qwfE7fSVaZM&t=34523s and used some source code there as our starting point. Great thanks to John Smilga who created this tutorial for us!
