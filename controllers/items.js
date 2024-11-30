@@ -62,24 +62,32 @@ const createItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   const {
-    body: { name, price, description, category, condition },
+    body,
     params: { itemId },
     user: { userId },
   } = req;
 
-  if (item.sellerId != userId) {
-    throw new BadRequestError(
-      "You don't have rights to update this item as you're NOT the seller."
-    );
-  }
-  const item = await Item.findByIdAndUpdate(itemId, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const item = await Item.findById(itemId);
   if (!item) {
     throw new NotFoundError(`No item with id ${itemId}`);
   }
-  res.status(StatusCodes.OK).json({ item });
+
+  if (item.sellerId.toString() !== userId) {
+    throw new BadRequestError(
+        "You don't have rights to update this item as you're NOT the seller."
+    );
+  }
+
+  const updatedItem = await Item.findByIdAndUpdate(itemId, body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updatedItem) {
+    throw new NotFoundError(`Failed to update item with id ${itemId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ item: updatedItem });
 };
 
 const deleteItem = async (req, res) => {
@@ -88,20 +96,20 @@ const deleteItem = async (req, res) => {
     user: { userId },
   } = req;
 
-  if (item.sellerId != userId) {
-    throw new BadRequestError(
-      "You don't have rights to delete this item as you're NOT the seller."
-    );
-  }
-
-  const item = await Item.findByIdAndRemove({
-    _id: itemId,
-  });
+  const item = await Item.findById(itemId);
   if (!item) {
     throw new NotFoundError(`No item with id ${itemId}`);
   }
 
-  res.status(StatusCodes.OK).send("delete successfully");
+  if (item.sellerId.toString() !== userId) {
+    throw new BadRequestError(
+        "You don't have rights to delete this item as you're NOT the seller."
+    );
+  }
+
+  await item.remove();
+
+  res.status(StatusCodes.OK).send("Item deleted successfully");
 };
 
 module.exports = {
