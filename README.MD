@@ -16,6 +16,14 @@ All data are user-generated. There is no explicit data loading and preprocessing
 
 ### Runing Backend
 
+Add .env file under the BuzzTrade directory with the following env variables
+
+```bash
+MONGO_URI = <YOUR-MONGO-URI>
+JWT_SECRET = '123456'
+JWT_LIFETIME = '30d'
+```
+
 Run the following command to run our backend server on your local server (default port 8080)
 
 ```bash
